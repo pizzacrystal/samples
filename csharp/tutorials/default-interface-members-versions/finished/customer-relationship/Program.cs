@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using static System.Console;
 
 namespace customer_relationship
 {
@@ -17,11 +18,17 @@ namespace customer_relationship
                 }
             };
 
+            SampleCustomer d = new SampleCustomer("customer two", new DateTime(1970, 1, 1));
+
             SampleOrder o = new SampleOrder(new DateTime(2012, 6, 1), 5m);
             c.AddOrder(o);
 
-            o = new SampleOrder(new DateTime(2103, 7, 4), 25m);
+            o = new SampleOrder(new DateTime(2013, 7, 4), 25m);
             c.AddOrder(o);
+
+            o = new SampleOrder(new DateTime(2011, 1, 1), 35m);
+            d.AddOrder(o);
+            d.AddOrder(o);
 
             // <SnippetHighlightCast>
             // Check the discount:
@@ -55,6 +62,9 @@ namespace customer_relationship
             // <SnippetSetLoyaltyThresholds>
             ICustomer.SetLoyaltyThresholds(new TimeSpan(30, 0, 0, 0), 1, 0.25m);
             Console.WriteLine($"Current discount: {theCustomer.ComputeLoyaltyDiscount()}");
+            ICustomer.SetLoyaltyThresholds(new TimeSpan(365 * 40, 0, 0, 0), 1, 0.90m);
+            Console.WriteLine($"Current discount: {d.ComputeLoyaltyDiscount()}");
+            WriteLine($"{ICustomer.CONST}");
             // </SnippetSetLoyaltyThresholds>
         }
     }

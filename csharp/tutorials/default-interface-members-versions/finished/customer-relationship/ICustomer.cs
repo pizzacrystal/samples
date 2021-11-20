@@ -7,6 +7,7 @@ namespace customer_relationship
 {
     public interface ICustomer
     {
+        public const int CONST = 10203040;
         IEnumerable<IOrder> PreviousOrders { get; }
 
         DateTime DateJoined { get; }
